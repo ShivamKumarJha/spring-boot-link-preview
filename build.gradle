@@ -13,6 +13,9 @@ sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
+	maven {
+		url "https://repo.spring.io/milestone"
+	}
 }
 
 dependencies {
@@ -28,8 +31,15 @@ dependencies {
 	implementation 'org.jetbrains.kotlin:kotlin-reflect'
 	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
+	//Kotlin coroutines
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4"
+
 	//Db - h2
 	runtimeOnly 'com.h2database:h2'
+
+	// jsoup HTML parser library @ https://jsoup.org/
+	implementation 'org.jsoup:jsoup:1.15.3'
 }
 
 tasks.withType(KotlinCompile) {
