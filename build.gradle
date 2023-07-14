@@ -1,54 +1,60 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id 'org.springframework.boot' version '2.7.7'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id 'org.jetbrains.kotlin.jvm' version '1.6.21'
-	id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'org.springframework.boot' version '3.1.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.22'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.8.22'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.8.22'
 }
 
 group = 'com.shivamkumarjha'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+
+java {
+    sourceCompatibility = '17'
+}
 
 repositories {
-	mavenCentral()
-	maven {
-		url "https://repo.spring.io/milestone"
-	}
+    mavenCentral()
+    maven {
+        url "https://repo.spring.io/milestone"
+    }
 }
 
 dependencies {
-	//Spring boot
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    //Spring boot
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	//Jackson parser
-	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    //Jackson parser
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
 
-	//Kotlin
-	implementation 'org.jetbrains.kotlin:kotlin-reflect'
-	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    //Kotlin
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
-	//Kotlin coroutines
-	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4"
+    //Kotlin coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.4"
 
-	//Db - h2
-	runtimeOnly 'com.h2database:h2'
+    //Db - h2
+    runtimeOnly 'com.h2database:h2'
 
-	// jsoup HTML parser library @ https://jsoup.org/
-	implementation 'org.jsoup:jsoup:1.15.3'
+    // jsoup HTML parser library @ https://jsoup.org/
+    implementation 'org.jsoup:jsoup:1.15.3'
 }
 
 tasks.withType(KotlinCompile) {
-	kotlinOptions {
-		freeCompilerArgs = ['-Xjsr305=strict']
-		jvmTarget = '11'
-	}
+    kotlinOptions {
+        freeCompilerArgs += '-Xjsr305=strict'
+        jvmTarget = '17'
+    }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
